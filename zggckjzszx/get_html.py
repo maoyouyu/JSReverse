@@ -58,7 +58,7 @@ JsData = """function get_arg3_value(arg1) {
  return arg3
  }"""
 
-def calculate_m_value(arg1):
+def get_arg3(arg1):
     psd = execjs.compile(JsData).call('get_arg3_value', arg1)
     return psd
 
@@ -66,7 +66,7 @@ def calculate_m_value(arg1):
 def get_arg1():
     ret = requests.get(url)
     arg1 = ret.text.split("arg1=")[-1].split(";")[0].strip('"').strip("'")
-    arg3 = calculate_m_value(arg1)
+    arg3 = get_arg3(arg1)
     get_html(arg3)
 
 
@@ -85,8 +85,6 @@ def get_html(arg3):
     }
 
     ret = requests.get(url, cookies=cookies, headers=headers)
-    ret.encoding = ret.apparent_encoding
-    print(ret.encoding)
     print(ret.text)
 
 
